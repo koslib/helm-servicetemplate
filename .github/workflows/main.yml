@@ -21,7 +21,7 @@ jobs:
       uses: stefanprodan/helm-gh-pages@v1.0.0
       with:
         token: ${{ secrets.MY_TOKEN }}
-        charts_dir: .
+        charts_dir: chart
         charts_url: https://www.koslib.com/mycharts
         owner: koslibpro
         repository: mycharts
