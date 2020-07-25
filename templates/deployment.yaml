@@ -38,21 +38,28 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           {{- if .Values.healthchecks.enabled }}
-            livenessProbe:
-              httpGet:
-                path: /health
-                port: http
-            readinessProbe:
-              httpGet:
-                path: /health
-                port: http
-          {{- end }}
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+          {{- end }}  
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
           {{- range $key, $val := .Values.env }}
             - name: {{ $key }}
               value: {{ $val | quote }}
+          {{- end}}
+          {{- range $key, $val := .Values.secrets }}
+            - name: {{ $key }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "service_template.fullname" . }}
+                  key: {{ $key }}
           {{- end}}
       {{- with .Values.nodeSelector }}
       nodeSelector:
