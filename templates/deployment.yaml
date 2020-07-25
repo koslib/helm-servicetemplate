@@ -49,6 +49,7 @@ spec:
           {{- end }}  
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          {{- $secretKeyRef := include "service_template.fullname" . }}
           env:
           {{- range $key, $val := .Values.env }}
             - name: {{ $key }}
@@ -58,7 +59,7 @@ spec:
             - name: {{ $key }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "service_template.fullname" . }}
+                  name: {{ $secretKeyRef }}
                   key: {{ $key }}
           {{- end}}
       {{- with .Values.nodeSelector }}

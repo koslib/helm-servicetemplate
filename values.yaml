@@ -74,8 +74,8 @@ tolerations: []
 
 affinity: {}
 
-env:
-  FOO: bar
+env: {}
+  # FOO:BAR
 
 healthchecks:
   enabled: true
