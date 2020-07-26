@@ -79,3 +79,9 @@ env: {}
 
 healthchecks:
   enabled: true
+
+# Container command optionally enabled
+containerCommand:
+  enabled: false
+  command: ""
+  args: []
