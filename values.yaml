@@ -79,6 +79,7 @@ env: {}
 
 healthchecks:
   enabled: true
+  initialDelaySeconds: 0
 
 # Container command optionally enabled
 containerCommand:

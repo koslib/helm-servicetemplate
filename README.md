@@ -1,5 +1,5 @@
 # helm-servicetemplate
-Helm Service Template for Python and Go apps I use
+Helm Service Template - tested on Python and Go apps but should work pretty much with anything.
 
 # Usage
 
