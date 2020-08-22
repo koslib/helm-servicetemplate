@@ -1,5 +1,5 @@
 {{- if .Values.autoscaling.enabled }}
-apiVersion: autoscaling/v2beta1
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ include "service_template.fullname" . }}
@@ -17,12 +17,27 @@ spec:
     - type: Resource
       resource:
         name: cpu
-        targetAverageUtilization: {{ .Values.autoscaling.targetCPUUtilizationPercentage }}
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.autoscaling.targetCPUUtilizationPercentage }}
   {{- end }}
   {{- if .Values.autoscaling.targetMemoryUtilizationPercentage }}
     - type: Resource
       resource:
         name: memory
-        targetAverageUtilization: {{ .Values.autoscaling.targetMemoryUtilizationPercentage }}
+        target: 
+          type: Utilization
+          averageUtilization: {{ .Values.autoscaling.targetMemoryUtilizationPercentage }}
   {{- end }}
+  
+  # TODO: support for `behavior` field came in v1.18. Support it accordingly.
+  # behavior:
+  #   scalUp:
+  #     stabilizationWindowSeconds: 60
+    # scaleDown:
+      # stabilizationWindowSeconds: 10
+      # policies:
+      # - type: Percent
+      #   value: 100
+      #   periodSeconds: 15
 {{- end }}
