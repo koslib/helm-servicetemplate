@@ -79,6 +79,8 @@ env: {}
 
 healthchecks:
   enabled: true
+  path: /health
+  port: http
   initialDelaySeconds: 0
 
 # Container command optionally enabled

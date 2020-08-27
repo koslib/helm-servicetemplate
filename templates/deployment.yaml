@@ -49,13 +49,13 @@ spec:
           {{- if .Values.healthchecks.enabled }}
           livenessProbe:
             httpGet:
-              path: /health
-              port: http
+              path: {{ .Values.healthchecks.path }}
+              port: {{ .Values.healthchecks.port }}
             initialDelaySeconds: {{ .Values.healthchecks.initialDelaySeconds }}
           readinessProbe:
             httpGet:
-              path: /health
-              port: http
+              path: {{ .Values.healthchecks.path }}
+              port: {{ .Values.healthchecks.port }}
             initialDelaySeconds: {{ .Values.healthchecks.initialDelaySeconds }}
           {{- end }}  
           resources:
