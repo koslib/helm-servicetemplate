@@ -11,8 +11,8 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
+      maxSurge: {{ .Values.rollingUpdate.maxSurge }}
+      maxUnavailable: {{ .Values.rollingUpdate.maxUnavailable }}
   selector:
     matchLabels:
       {{- include "service_template.selectorLabels" . | nindent 6 }}
@@ -49,13 +49,13 @@ spec:
           {{- if .Values.healthchecks.enabled }}
           livenessProbe:
             httpGet:
-              path: /health
-              port: http
+              path: {{ .Values.healthchecks.path }}
+              port: {{ .Values.healthchecks.port }}
             initialDelaySeconds: {{ .Values.healthchecks.initialDelaySeconds }}
           readinessProbe:
             httpGet:
-              path: /health
-              port: http
+              path: {{ .Values.healthchecks.path }}
+              port: {{ .Values.healthchecks.port }}
             initialDelaySeconds: {{ .Values.healthchecks.initialDelaySeconds }}
           {{- end }}  
           resources:

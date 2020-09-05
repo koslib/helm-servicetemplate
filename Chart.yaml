@@ -2,7 +2,4 @@ apiVersion: v2
 name: servicetpl
 description: A Helm chart for services running on Kubernetes
 
-type: application
-version: 0.5.3
-
-appVersion: 0.0.1
+version: 0.6.1
