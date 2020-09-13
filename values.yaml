@@ -59,10 +59,10 @@ ingress:
 
 ingress_private:
   enabled: false
-  annotations: {}
+  annotations:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
-    ingress.kubernetes.io/whitelist-source-range: 49.36.X.X/32
+    nginx.ingress.kubernetes.io/whitelist-source-range: 49.36.X.X/32
   hosts:
     - host: chart-example.local
       paths: []
