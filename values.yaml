@@ -62,7 +62,7 @@ ingress_private:
   annotations:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
-    nginx.ingress.kubernetes.io/whitelist-source-range: 49.36.X.X/32
+    nginx.ingress.kubernetes.io/whitelist-source-range: 49.36.X.X/32  # Change this to satisfy your requirements
   hosts:
     - host: chart-example.local
       paths: []
