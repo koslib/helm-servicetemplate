@@ -50,6 +50,7 @@ Selector labels
 {{- define "service_template.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "service_template.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+app: {{ .Release.Name }}
 {{- end }}
 
 {{/*
