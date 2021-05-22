@@ -46,6 +46,12 @@ service:
   type: ClusterIP
   port: 8080
 
+# Enabling the `service_private` is a prerequisite for enabling the private Ingress resource.
+service_private:
+  enabled: false  # Flip this to `true` in order to enable the private service 
+  type: ClusterIP
+  port: 9090
+
 ingress:
   enabled: false
   annotations: {}

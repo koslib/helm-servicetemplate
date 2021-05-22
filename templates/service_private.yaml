@@ -1,0 +1,22 @@
+apiVersion: v1
+{{- if .Values.service_private.enabled -}}
+
+kind: Service
+metadata:
+  name: {{ include "service_template.fullname" . }}-private
+  labels:
+    {{- include "service_template.labels" . | nindent 4 }}
+  {{- with .Values.service_private.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.service_private.type }}
+  ports:
+    - port: {{ .Values.service_private.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "service_template.selectorLabels" . | nindent 4 }}
+{{- end }}

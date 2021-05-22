@@ -26,3 +26,8 @@ helm upgrade --install <release name> ...
 # Contributions
 
 Feel free to let me know of any feedback, open issues if you encounter any or submit your PullRequests!
+
+# Values documentation
+
+| Value Name | Value Type | Default | Detail |
+
