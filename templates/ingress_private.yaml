@@ -1,16 +1,10 @@
 {{- if .Values.ingress_private.enabled -}}
-{{- $publicSvcFullName := include "service_template.fullname" . -}}
-{{- $publicSvcPort := .Values.service.port -}}
-{{- $privateSvcFullName := include "service_template.fullname" . -}}-private
-{{- $privateSvcPort := .Values.service_private.port -}}
-{{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
-apiVersion: networking.k8s.io/v1beta1
-{{- else -}}
-apiVersion: extensions/v1beta1
-{{- end }}
+{{- $svcName := include "service_template.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ $privateSvcFullName }}
+  name: {{ $svcName }}-private
   labels:
     {{- include "service_template.labels" . | nindent 4 }}
   {{- with .Values.ingress_private.annotations }}
@@ -35,16 +29,12 @@ spec:
         paths:
           {{- range .paths }}
           - path: {{ . }}
+            pathType: Prefix
             backend:
-              serviceName: {{ $publicSvcFullName }}
-              servicePort: {{ $publicSvcPort }}
-          {{- end }}
-          {{- range .paths }}
-          - path: {{ . }}
-            backend:
-              serviceName: {{ $privateSvcFullName }}
-              servicePort: {{ $privateSvcPort }}
+              service:
+                name : {{ $svcName }}-private
+                port:
+                  number: {{ $svcPort }}
           {{- end }}
     {{- end }}
-    
-{{- end }}
+  {{- end }}
