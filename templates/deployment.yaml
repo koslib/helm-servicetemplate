@@ -32,6 +32,19 @@ spec:
       serviceAccountName: {{ include "service_template.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      
+      {{- if .Values.secretsVolumeEnabled }}
+      volumes:
+        - name: secrets
+          secret: 
+            secretName: {{ include "service_template.fullname" . }}-volume
+            items:
+            {{- range $key, $val := .Values.secrets_volume }}
+              - key: {{ $key }}
+                path: {{ $key }}
+            {{- end }}
+      {{- end }}
+
       containers:
         - name: {{ .Values.serviceName }}
           securityContext:
@@ -65,14 +78,23 @@ spec:
           {{- range $key, $val := .Values.env }}
             - name: {{ $key }}
               value: {{ $val | quote }}
-          {{- end}}
+          {{- end }}
           {{- range $key, $val := .Values.secrets }}
             - name: {{ $key }}
               valueFrom:
                 secretKeyRef:
                   name: {{ $secretKeyRef }}
                   key: {{ $key }}
-          {{- end}}
+          {{- end -}}
+          
+          {{- if .Values.secretsVolumeEnabled }}
+          volumeMounts:
+          {{- range $key, $val := .Values.secrets_volume }}
+          - name: secrets
+            mountPath: {{ $key }}
+          {{- end -}}
+          {{- end -}}
+
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
