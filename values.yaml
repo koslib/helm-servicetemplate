@@ -110,5 +110,6 @@ containerCommand:
 
 # Mount secrets as volumes
 secretsVolumeEnabled: false # defaults to false. If it exists
+secretsVolumeMountPath: "/var/run/secrets/"
 secrets_volume:
   # some_secret_file.json: some-sensitive-value # this will be mounted as a volume in the path defined above
