@@ -91,7 +91,7 @@ spec:
           volumeMounts:
           {{- range $key, $val := .Values.secrets_volume }}
           - name: secrets
-            mountPath: {{ .Values.secretsVolumeMountPath }}
+            mountPath: "/var/run/secrets/"
           {{- end -}}
           {{- end -}}
 
