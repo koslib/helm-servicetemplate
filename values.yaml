@@ -107,6 +107,10 @@ containerCommand:
   command: ""
   args: []
 
+# This is a placeholder for additional containers. This field allows to add more container definitions to support multi-container pods.
+# For the container spec, you can check out the official docs here: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.25/#container-v1-core
+additionalContainers: []
+
 # Mount secrets as volumes
 secretsVolumeEnabled: false # defaults to false. If it exists
 secrets_volume:
