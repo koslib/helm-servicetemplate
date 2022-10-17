@@ -2,4 +2,4 @@ apiVersion: v2
 name: servicetpl
 description: A general-purpose Helm chart for your own applications running on Kubernetes
 
-version: 0.14.0
+version: 0.15.0
