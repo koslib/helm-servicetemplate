@@ -94,6 +94,9 @@ spec:
             mountPath: "/var/run/secrets/"
           {{- end -}}
           {{- end -}}
+        {{- with .Values.additionalContainers }}
+          {{- toYaml . | nindent 10 -}}
+        {{- end -}}
 
       {{- with .Values.nodeSelector }}
       nodeSelector:
