@@ -5,7 +5,7 @@ Helm Service Template - tested on Python and Go apps but should work pretty much
 
 ## Package the helm chart
 `helm package ./service_template` and commit the new version into your remote chart repo. 
-I use Github Pages for myself and it is hosted here: https://github.com/koslibpro/mycharts.
+I use Github Pages for myself and it is hosted here: https://github.com/koslib/mycharts.
 
 ## Releases
 
