@@ -91,7 +91,9 @@ spec:
           volumeMounts:
           {{- range $key, $val := .Values.secrets_volume }}
           - name: secrets
-            mountPath: "/var/run/secrets/"
+            mountPath: /var/run/secrets/{{ $key }}
+            subPath: {{ $key }}
+            readOnly: true
           {{- end -}}
           {{- end -}}
 
